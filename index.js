@@ -1,3 +1,4 @@
+const homeTitle = document.querySelector(".home-title");
 const edit = document.querySelector(".home-edit");
 const save = document.querySelector(".home-save");
 const combo = document.querySelectorAll(".combobox");
@@ -59,6 +60,7 @@ for(i = 0; i<7; i++){
 
 edit.addEventListener("click", editMode);
 save.addEventListener("click", saveMode);
+homeTitle.addEventListener("click", offEdit);
 
 //end
 
@@ -66,6 +68,16 @@ save.addEventListener("click", saveMode);
 
 
 //functions start here
+function offEdit(){
+   console.log("clicked the home");
+      edit.style.display = "flex";
+      save.style.display = "none";
+      for(i=0; i<7; i++){
+         combo[i].style.display = "none";
+         checkbox[i].style.display = "flex";
+         push_pull[i].style.display = "flex";
+      }
+}
 
 function editMode(){
    edit.style.display = "none";

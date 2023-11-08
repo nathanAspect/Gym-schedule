@@ -99,17 +99,22 @@ section{
 .combobox option{
    font-size: 14px;
 }
+.checkboxHolder{
+   position: relative;
+}
+
 .checkbox{
    width: 30px;
    aspect-ratio: 1;
-   appearance: none;
+   outline: none;
    border: none;
    background-color: rgb(219, 219, 219);
-   border-radius: 5px;
    margin: 5px 5px 5px 15px;
    display: flex;
 }
-
+.checkbox:checked {
+   background-color: blue;
+}
 .home-footer{
    width: 80%;
    display: flex;
@@ -132,7 +137,6 @@ section{
 .home-save{
    display: none;
 }
-
 
 
 
