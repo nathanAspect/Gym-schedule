@@ -69,7 +69,6 @@ homeTitle.addEventListener("click", offEdit);
 
 //functions start here
 function offEdit(){
-   console.log("clicked the home");
       edit.style.display = "flex";
       save.style.display = "none";
       for(i=0; i<7; i++){
