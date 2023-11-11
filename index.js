@@ -9,9 +9,11 @@ const day = document.querySelectorAll(".day");
 const home = document.querySelector(".home");
 const nextPage = document.querySelector(".nextPage");
 const nextPageTitle = document.querySelector(".nextPageTitle h1");
+const nextPageTitleHolder = document.querySelector(".next-title");
 
 
 var sch;
+var editing=false;
 
 //object declaration starts here
 
@@ -67,12 +69,18 @@ for(i = 0; i<7; i++){
 edit.addEventListener("click", editMode);
 save.addEventListener("click", saveMode);
 homeTitle.addEventListener("click", offEdit);
+nextPageTitleHolder.addEventListener("click", function(){
+   nextPage.style.transform = "translateX(100%)";
+   home.style.transform = "translateX(0%)";
+})
 
 
 day.forEach(function(value) {
    value.addEventListener("click", function() {
-     slide();
-     nextPageTitle.innerHTML = `<h1>${value.getAttribute("value")}<span>list</span></h1>`;
+      if(!editing){
+         slide();
+         nextPageTitle.innerHTML = `<h1>${value.getAttribute("value")}<span>list</span></h1>`;
+      }
    });
  });
 
@@ -89,6 +97,7 @@ function slide(){
 
 
 function offEdit(){
+      editing = false;
       edit.style.display = "flex";
       save.style.display = "none";
       for(i=0; i<7; i++){
@@ -99,6 +108,7 @@ function offEdit(){
 }
 
 function editMode(){
+   editing = true;
    edit.style.display = "none";
    save.style.display = "flex";
    for(i = 0; i<7; i++){
@@ -109,6 +119,7 @@ function editMode(){
 }
 
 function saveMode(){
+   editing = false;
    for(i = 0; i<7; i++){
        push_pull[i].innerText = combo[i].value;
        schedule["day"+String(i+1)] = combo[i].value;
