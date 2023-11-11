@@ -5,6 +5,12 @@ const combo = document.querySelectorAll(".combobox");
 const checkbox = document.querySelectorAll(".checkbox");
 const push_pull = document.querySelectorAll(".push-pull");
 
+const day = document.querySelectorAll(".day");
+const home = document.querySelector(".home");
+const nextPage = document.querySelector(".nextPage");
+const nextPageTitle = document.querySelector(".nextPageTitle h1");
+
+
 var sch;
 
 //object declaration starts here
@@ -62,12 +68,26 @@ edit.addEventListener("click", editMode);
 save.addEventListener("click", saveMode);
 homeTitle.addEventListener("click", offEdit);
 
+
+day.forEach(function(value) {
+   value.addEventListener("click", function() {
+     slide();
+     nextPageTitle.innerHTML = `<h1>${value.getAttribute("value")}<span>list</span></h1>`;
+   });
+ });
+
 //end
 
 
 
 
 //functions start here
+function slide(){
+   nextPage.style.transform = "translateX(-100%)";
+   home.style.transform = "translateX(-100%)";
+}
+
+
 function offEdit(){
       edit.style.display = "flex";
       save.style.display = "none";
@@ -133,6 +153,11 @@ function scheduleUpdate(){
    }
    sch = JSON.stringify(schedule);
    localStorage.setItem("schedule", sch);
+}
+
+
+function inDay(day){
+   //nextPageTitle.innerHTML = `${day.getAttribute("value")}<span>list</span>`;
 }
 //end
 

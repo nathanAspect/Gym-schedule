@@ -10,10 +10,14 @@ body{
    padding: 0;
    background-color: rgb(219, 219, 219);
    font-family: Arial, Helvetica, sans-serif;
+   display: flex;
+   width: 200%;
+   
 }
 section{
    position: relative;
    height: 100vh;
+   width: 100%;
    transition: transform 0.5s ease-in-out;
 }
 .home{
@@ -22,7 +26,7 @@ section{
    justify-content: start;
    padding: 20px 0 0 0;
    align-items: center;
-   width: 100vw;
+   width: 100%;
    height: 100vh;
 }
 .home-title{
@@ -140,3 +144,6 @@ section{
 
 
 
+.nextPage{
+  
+}
