@@ -76,11 +76,17 @@ nextPageTitleHolder.addEventListener("click", function(){
 
 
 day.forEach(function(value) {
-   value.addEventListener("click", function() {
+   value.addEventListener("click", function(event) {
       if(!editing){
          slide();
          nextPageTitle.innerHTML = `<h1>${value.getAttribute("value")}<span>list</span></h1>`;
       }
+   });
+ });
+
+ checkbox.forEach(function(value) {
+   value.addEventListener("click", function(event) {
+      event.stopPropagation();
    });
  });
 
