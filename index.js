@@ -10,6 +10,7 @@ const home = document.querySelector(".home");
 const nextPage = document.querySelector(".nextPage");
 const nextPageTitle = document.querySelector(".nextPageTitle h1");
 const nextPageTitleHolder = document.querySelector(".next-title");
+const listHolder = document.querySelector(".list-holder");
 
 
 var sch;
@@ -32,6 +33,13 @@ var workedDays = {
    array : [0, 0, 0, 0, 0, 0, 0]
 }
 
+var monday = ['monday'];
+var tuesday = ["tuesday", "tuesday2"];
+var wednesday = ["wednsday", "wednsday2", "wednsday3"];
+var thursday = ["thursday1"];
+var friday = ["friday1", "friday2"];
+var saturday = ["satuday1", "saturday2", "saturday3"];
+var sunday = ["sunday1"];
 //end
 
 
@@ -107,6 +115,7 @@ day.forEach(function(value) {
       if(!editing){
          slide();
          nextPageTitle.innerHTML = `<h1>${value.getAttribute("value")}<span>list</span></h1>`;
+         insideDayDisplay(value);
       }
    });
  });
@@ -211,5 +220,89 @@ function checkboxUpdate(){
    localStorage.setItem("workedDays", chk);
 }
 
+
+
+
+
+
+function insideDayDisplay(value){
+   if(value.getAttribute('value')==="Monday"){
+      listHolder.innerHTML = null;
+      for(i=0; i<monday.length; i++){
+         listHolder.innerHTML += `
+         <div class="list-element">
+            <p>${monday[i]}</p>
+            <img src="resource/delete.png">
+         </div>`
+      }
+   }
+
+   else if(value.getAttribute('value')==="Tuesday"){
+      listHolder.innerHTML = null;
+      for(i=0; i<tuesday.length; i++){
+         listHolder.innerHTML += `
+         <div class="list-element">
+            <p>${tuesday[i]}</p>
+            <img src="resource/delete.png">
+         </div>`
+      }
+   }
+
+   else if(value.getAttribute('value')==="Wedn"){
+      listHolder.innerHTML = null;
+      for(i=0; i<wednesday.length; i++){
+         listHolder.innerHTML += `
+         <div class="list-element">
+            <p>${wednesday[i]}</p>
+            <img src="resource/delete.png">
+         </div>`
+      }
+   }
+
+   else if(value.getAttribute('value')==="Thursday"){
+      listHolder.innerHTML = null;
+      for(i=0; i<thursday.length; i++){
+         listHolder.innerHTML += `
+         <div class="list-element">
+            <p>${thursday[i]}</p>
+            <img src="resource/delete.png">
+         </div>`
+      }
+   }
+
+   else if(value.getAttribute('value')==="Friday"){
+      listHolder.innerHTML = null;
+      for(i=0; i<friday.length; i++){
+         listHolder.innerHTML += `
+         <div class="list-element">
+            <p>${friday[i]}</p>
+            <img src="resource/delete.png">
+         </div>`
+      }
+   }
+
+   else if(value.getAttribute('value')==="Saturday"){
+      listHolder.innerHTML = null;
+      for(i=0; i<saturday.length; i++){
+         listHolder.innerHTML += `
+         <div class="list-element">
+            <p>${saturday[i]}</p>
+            <img src="resource/delete.png">
+         </div>`
+      }
+   }
+
+   else if(value.getAttribute('value')==="Sunday"){
+      listHolder.innerHTML = null;
+      for(i=0; i<sunday.length; i++){
+         listHolder.innerHTML += `
+         <div class="list-element">
+            <p>${sunday[i]}</p>
+            <img src="resource/delete.png">
+         </div>`
+      }
+   }
+
+}
 //end
 
