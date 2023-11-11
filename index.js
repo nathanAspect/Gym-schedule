@@ -13,6 +13,7 @@ const nextPageTitleHolder = document.querySelector(".next-title");
 
 
 var sch;
+var chk;
 var editing=false;
 
 //object declaration starts here
@@ -27,12 +28,25 @@ var schedule = {
    "day7": "Rest"
 }
 
+var workedDays = {
+   array : [0, 0, 0, 0, 0, 0, 0]
+}
 
 //end
+
+
+
+
+
+// this part is the part that loads when the app is opened, like the infos and stuff
 
 if(localStorage.getItem("schedule") != null){
    schedule = JSON.parse(localStorage.getItem("schedule"));
 }
+if(localStorage.getItem("workedDays") != null){
+   workedDays = JSON.parse(localStorage.getItem("workedDays"));
+}
+
 
 for(i = 0; i<7; i++){
    push_pull[i].innerText = schedule["day"+String((i+1))];
@@ -63,6 +77,19 @@ for(i = 0; i<7; i++){
    }
 }
 
+for(i = 0; i < 7; i++){
+   if(workedDays.array[i]===1){checkbox[i].checked = true;}
+   else{
+      checkbox[i].checked = false;
+   }
+}
+
+// end
+
+
+
+
+
 
 //event listeners declaration starts here
 
@@ -84,9 +111,12 @@ day.forEach(function(value) {
    });
  });
 
- checkbox.forEach(function(value) {
+ checkbox.forEach(function(value, index) {
    value.addEventListener("click", function(event) {
       event.stopPropagation();
+      if(value.checked){workedDays.array[index] = 1;}
+      else{workedDays.array[index] = 0;}
+      checkboxUpdate();
    });
  });
 
@@ -173,8 +203,13 @@ function scheduleUpdate(){
 }
 
 
-function inDay(day){
-   //nextPageTitle.innerHTML = `${day.getAttribute("value")}<span>list</span>`;
+function checkboxUpdate(){
+   if(localStorage.getItem("workedDays") != null){
+      localStorage.removeItem("workedDays");
+   }
+   chk = JSON.stringify(workedDays);
+   localStorage.setItem("workedDays", chk);
 }
+
 //end
 
