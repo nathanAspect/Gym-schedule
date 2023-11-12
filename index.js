@@ -11,11 +11,16 @@ const nextPage = document.querySelector(".nextPage");
 const nextPageTitle = document.querySelector(".nextPageTitle h1");
 const nextPageTitleHolder = document.querySelector(".next-title");
 const listHolder = document.querySelector(".list-holder");
+const add = document.querySelector(".add img");
+const save2 = document.querySelector(".check-mark-page2");
+const cancel = document.querySelector(".close-mark-page2");
 
 
 var sch;
 var chk;
+var insd;
 var editing=false;
+var openedDay = null;
 
 //object declaration starts here
 
@@ -32,14 +37,16 @@ var schedule = {
 var workedDays = {
    array : [0, 0, 0, 0, 0, 0, 0]
 }
+var insideDay = {
+   monday : [],
+   tuesday : [],
+   wedn : [],
+   thursday : [],
+   friday : [],
+   saturday : [],
+   sunday : []
+}
 
-var monday = ['monday'];
-var tuesday = ["tuesday", "tuesday2"];
-var wednesday = ["wednsday", "wednsday2", "wednsday3"];
-var thursday = ["thursday1"];
-var friday = ["friday1", "friday2"];
-var saturday = ["satuday1", "saturday2", "saturday3"];
-var sunday = ["sunday1"];
 //end
 
 
@@ -53,6 +60,9 @@ if(localStorage.getItem("schedule") != null){
 }
 if(localStorage.getItem("workedDays") != null){
    workedDays = JSON.parse(localStorage.getItem("workedDays"));
+}
+if(localStorage.getItem("insideDay") != null){
+   insideDay = JSON.parse(localStorage.getItem("insideDay"));
 }
 
 
@@ -116,6 +126,11 @@ day.forEach(function(value) {
          slide();
          nextPageTitle.innerHTML = `<h1>${value.getAttribute("value")}<span>list</span></h1>`;
          insideDayDisplay(value);
+         openedDay = value.getAttribute("value");
+         if(insideDay[`${openedDay.toLowerCase()}`].length<5){add.style.display = "flex";}
+         else{add.style.display = "none";}
+         save2.style.display = "none";
+         cancel.style.display = "none";
       }
    });
  });
@@ -128,7 +143,59 @@ day.forEach(function(value) {
       checkboxUpdate();
    });
  });
+add.addEventListener("click", function(){
+   listHolder.innerHTML += `
+         <div class="list-element">
+            <input type="text" id="inputDataList" list="dataList" 
+            class="input-page2" placeholder="Enter Muscle Group">
+            <datalist id="dataList">
+               <option value="Shoulders">
+               <option value="Chest">
+               <option value="Triceps">
+               <option value="Back">
+               <option value="Biceps">
+               <option value="Fore-arm">
+               <option value="Core Abs">
+               <option value="Leg">
+            </datalist>
+         </div>`
+      add.style.display = "none";
+      save2.style.display = "flex";
+      cancel.style.display = "flex";
+   })
+save2.addEventListener("click", function(){
+   
+      const inputPage2 = document.querySelector(".input-page2");
+      
+      if(inputPage2.value===''){insideDay[`${openedDay.toLowerCase()}`].push('Untitled');}
+      else{insideDay[`${openedDay.toLowerCase()}`].push(inputPage2.value);}
+      if(openedDay==="Monday"){i=0;}
+      else if(openedDay==="Tuesday"){i=1;}
+      else if(openedDay==="wedn"){i=2;}
+      else if(openedDay==="Thursday"){i=3;}
+      else if(openedDay==="Friday"){i=4;}
+      else if(openedDay==="Saturday"){i=5;}
+      else if(openedDay==="Sunday"){i=6;}
+      insideDayDisplay(day[i]);
+      insideDayUpdate();
+      save2.style.display = "none";
+      cancel.style.display = "none";
+      if(insideDay[`${openedDay.toLowerCase()}`].length<5){add.style.display = "flex";}
+})
 
+cancel.addEventListener("click", function(){
+   if(openedDay==="Monday"){i=0;}
+   else if(openedDay==="Tuesday"){i=1;}
+   else if(openedDay==="wedn"){i=2;}
+   else if(openedDay==="Thursday"){i=3;}
+   else if(openedDay==="Friday"){i=4;}
+   else if(openedDay==="Saturday"){i=5;}
+   else if(openedDay==="Sunday"){i=6;}
+   insideDayDisplay(day[i]);
+   save2.style.display = "none";
+   cancel.style.display = "none";
+   if(insideDay[`${openedDay.toLowerCase()}`].length<5){add.style.display = "flex";}
+})
 //end
 
 
@@ -220,7 +287,13 @@ function checkboxUpdate(){
    localStorage.setItem("workedDays", chk);
 }
 
-
+function insideDayUpdate(){
+   if(localStorage.getItem("insideDay") != null){
+      localStorage.removeItem("insideDay");
+   }
+   insd = JSON.stringify(insideDay);
+   localStorage.setItem("insideDay", insd);
+}
 
 
 
@@ -228,10 +301,10 @@ function checkboxUpdate(){
 function insideDayDisplay(value){
    if(value.getAttribute('value')==="Monday"){
       listHolder.innerHTML = null;
-      for(i=0; i<monday.length; i++){
+      for(i=0; i<insideDay.monday.length; i++){
          listHolder.innerHTML += `
          <div class="list-element">
-            <p>${monday[i]}</p>
+            <p>${insideDay.monday[i]}</p>
             <img src="resource/delete.png">
          </div>`
       }
@@ -239,10 +312,10 @@ function insideDayDisplay(value){
 
    else if(value.getAttribute('value')==="Tuesday"){
       listHolder.innerHTML = null;
-      for(i=0; i<tuesday.length; i++){
+      for(i=0; i<insideDay.tuesday.length; i++){
          listHolder.innerHTML += `
          <div class="list-element">
-            <p>${tuesday[i]}</p>
+            <p>${insideDay.tuesday[i]}</p>
             <img src="resource/delete.png">
          </div>`
       }
@@ -250,10 +323,10 @@ function insideDayDisplay(value){
 
    else if(value.getAttribute('value')==="Wedn"){
       listHolder.innerHTML = null;
-      for(i=0; i<wednesday.length; i++){
+      for(i=0; i<insideDay.wedn.length; i++){
          listHolder.innerHTML += `
          <div class="list-element">
-            <p>${wednesday[i]}</p>
+            <p>${insideDay.wedn[i]}</p>
             <img src="resource/delete.png">
          </div>`
       }
@@ -261,10 +334,10 @@ function insideDayDisplay(value){
 
    else if(value.getAttribute('value')==="Thursday"){
       listHolder.innerHTML = null;
-      for(i=0; i<thursday.length; i++){
+      for(i=0; i<insideDay.thursday.length; i++){
          listHolder.innerHTML += `
          <div class="list-element">
-            <p>${thursday[i]}</p>
+            <p>${insideDay.thursday[i]}</p>
             <img src="resource/delete.png">
          </div>`
       }
@@ -272,10 +345,10 @@ function insideDayDisplay(value){
 
    else if(value.getAttribute('value')==="Friday"){
       listHolder.innerHTML = null;
-      for(i=0; i<friday.length; i++){
+      for(i=0; i<insideDay.friday.length; i++){
          listHolder.innerHTML += `
          <div class="list-element">
-            <p>${friday[i]}</p>
+            <p>${insideDay.friday[i]}</p>
             <img src="resource/delete.png">
          </div>`
       }
@@ -283,10 +356,10 @@ function insideDayDisplay(value){
 
    else if(value.getAttribute('value')==="Saturday"){
       listHolder.innerHTML = null;
-      for(i=0; i<saturday.length; i++){
+      for(i=0; i<insideDay.saturday.length; i++){
          listHolder.innerHTML += `
          <div class="list-element">
-            <p>${saturday[i]}</p>
+            <p>${insideDay.saturday[i]}</p>
             <img src="resource/delete.png">
          </div>`
       }
@@ -294,10 +367,10 @@ function insideDayDisplay(value){
 
    else if(value.getAttribute('value')==="Sunday"){
       listHolder.innerHTML = null;
-      for(i=0; i<sunday.length; i++){
+      for(i=0; i<insideDay.sunday.length; i++){
          listHolder.innerHTML += `
          <div class="list-element">
-            <p>${sunday[i]}</p>
+            <p>${insideDay.sunday[i]}</p>
             <img src="resource/delete.png">
          </div>`
       }

@@ -12,6 +12,7 @@ body{
    font-family: Arial, Helvetica, sans-serif;
    display: flex;
    width: 200%;
+   height: 100vh;
    overflow: hidden;
    
 }
@@ -32,8 +33,7 @@ section{
 }
 .home-title{
    background-color: white;
-   padding: 20px;
-   width: 80%;
+   width: 90%;
    border-radius: 5px;
    display: grid;
    place-content: center;
@@ -152,6 +152,8 @@ section{
    width: 50px;
    aspect-ratio: 1;
    margin-top: 40px;
+   display: flex;
+   justify-content: center;
 }
 .add img{
    width: 100%;
@@ -175,8 +177,31 @@ section{
    padding: 0 5px;
    font-size: 24px;
    color: rgba(0, 0, 0, 0.884);
+   display: flex;
 }
 .list-element img{
    width: 30px;
    opacity: .6;
+   display: flex;
+}
+.input-page2{
+   display: flex;
+   border: none;
+   background-color: rgb(255, 255, 255);
+   color: rgba(0, 0, 0, 0.616);
+   margin: 0 10px;
+   height: 30px;
+   outline: none;
+   font-size: 20px;
+   border-radius: 5px;
+   
+}
+.add-mark-page2{
+   display: flex;
+}
+.check-mark-page2, .close-mark-page2{
+   display: none;
+   opacity: .7;
+   width: 100%;
+   margin: 0 30px;
 }
