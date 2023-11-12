@@ -177,7 +177,11 @@ section{
    padding: 0 5px;
    font-size: 24px;
    color: rgba(0, 0, 0, 0.884);
-   display: flex;
+   display: -webkit-box;
+   -webkit-box-orient: vertical;
+   -webkit-line-clamp: 1;
+   overflow: hidden;
+   text-overflow: ellipsis;
 }
 .list-element img{
    width: 30px;

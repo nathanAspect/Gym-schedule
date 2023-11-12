@@ -125,8 +125,8 @@ day.forEach(function(value) {
       if(!editing){
          slide();
          nextPageTitle.innerHTML = `<h1>${value.getAttribute("value")}<span>list</span></h1>`;
-         insideDayDisplay(value);
          openedDay = value.getAttribute("value");
+         insideDayDisplay(value);
          if(insideDay[`${openedDay.toLowerCase()}`].length<5){add.style.display = "flex";}
          else{add.style.display = "none";}
          save2.style.display = "none";
@@ -134,24 +134,7 @@ day.forEach(function(value) {
       }
 
 
-      // for the deleting functionality
-      if((insideDay[`${openedDay.toLowerCase()}`].length)>0){
-        const deleteBtn = document.querySelectorAll(".list-element img");
-        deleteBtn.forEach(function(value, index){
-           value.addEventListener("click", function(event){
-              insideDay[`${openedDay.toLowerCase()}`].splice(index, 1);
-              insideDayUpdate();
-              if(openedDay==="Monday"){i=0;}
-              else if(openedDay==="Tuesday"){i=1;}
-              else if(openedDay==="wedn"){i=2;}
-              else if(openedDay==="Thursday"){i=3;}
-              else if(openedDay==="Friday"){i=4;}
-              else if(openedDay==="Saturday"){i=5;}
-              else if(openedDay==="Sunday"){i=6;}
-              insideDayDisplay(day[i]);
-           })
-        })
-      }
+
    });
  });
 
@@ -198,7 +181,7 @@ save2.addEventListener("click", function(){
       else{insideDay[`${openedDay.toLowerCase()}`].push(inputPage2.value);}
       if(openedDay==="Monday"){i=0;}
       else if(openedDay==="Tuesday"){i=1;}
-      else if(openedDay==="wedn"){i=2;}
+      else if(openedDay==="Wedn"){i=2;}
       else if(openedDay==="Thursday"){i=3;}
       else if(openedDay==="Friday"){i=4;}
       else if(openedDay==="Saturday"){i=5;}
@@ -213,7 +196,7 @@ save2.addEventListener("click", function(){
 cancel.addEventListener("click", function(){
    if(openedDay==="Monday"){i=0;}
    else if(openedDay==="Tuesday"){i=1;}
-   else if(openedDay==="wedn"){i=2;}
+   else if(openedDay==="Wedn"){i=2;}
    else if(openedDay==="Thursday"){i=3;}
    else if(openedDay==="Friday"){i=4;}
    else if(openedDay==="Saturday"){i=5;}
@@ -229,6 +212,7 @@ cancel.addEventListener("click", function(){
 
 
 //functions start here
+
 function slide(){
    nextPage.style.transform = "translateX(-100%)";
    home.style.transform = "translateX(-100%)";
@@ -402,6 +386,30 @@ function insideDayDisplay(value){
          </div>`
       }
    }
+
+
+
+   if((insideDay[`${openedDay.toLowerCase()}`].length)>0){
+      const deleteBtn = document.querySelectorAll(".list-element img");
+      deleteBtn.forEach(function(value, index){
+         value.addEventListener("click", function(event){
+            insideDay[`${openedDay.toLowerCase()}`].splice(index, 1);
+            insideDayUpdate();
+            if(openedDay==="Monday"){i=0;}
+            else if(openedDay==="Tuesday"){i=1;}
+            else if(openedDay==="Wedn"){i=2;}
+            else if(openedDay==="Thursday"){i=3;}
+            else if(openedDay==="Friday"){i=4;}
+            else if(openedDay==="Saturday"){i=5;}
+            else if(openedDay==="Sunday"){i=6;}
+            insideDayDisplay(day[i]);
+         })
+      })
+
+
+      if(insideDay[`${openedDay.toLowerCase()}`].length<5){add.style.display = "flex";}
+
+    }
 
 }
 //end
