@@ -132,8 +132,35 @@ day.forEach(function(value) {
          save2.style.display = "none";
          cancel.style.display = "none";
       }
+
+
+      // for the deleting functionality
+      if((insideDay[`${openedDay.toLowerCase()}`].length)>0){
+        const deleteBtn = document.querySelectorAll(".list-element img");
+        deleteBtn.forEach(function(value, index){
+           value.addEventListener("click", function(event){
+              insideDay[`${openedDay.toLowerCase()}`].splice(index, 1);
+              insideDayUpdate();
+              if(openedDay==="Monday"){i=0;}
+              else if(openedDay==="Tuesday"){i=1;}
+              else if(openedDay==="wedn"){i=2;}
+              else if(openedDay==="Thursday"){i=3;}
+              else if(openedDay==="Friday"){i=4;}
+              else if(openedDay==="Saturday"){i=5;}
+              else if(openedDay==="Sunday"){i=6;}
+              insideDayDisplay(day[i]);
+           })
+        })
+      }
    });
  });
+
+ 
+
+   
+ 
+
+
 
  checkbox.forEach(function(value, index) {
    value.addEventListener("click", function(event) {
