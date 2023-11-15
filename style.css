@@ -1,6 +1,7 @@
 *{
    margin: 0;
    padding: 0;
+   box-sizing: border-box;
 }
 ::-webkit-scrollbar{
    width: 0;
@@ -250,7 +251,8 @@ section{
 }
 .third-title h1, 
 .third-title span{
-   margin: auto;display: -webkit-box;
+   margin: auto 5px;
+   display: -webkit-box;
    -webkit-box-orient: vertical;
    -webkit-line-clamp: 1;
    overflow: hidden;

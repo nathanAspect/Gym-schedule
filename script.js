@@ -19,7 +19,6 @@ const cancel = document.querySelector(".close-mark-page2");
 const thirdPage = document.querySelector(".third-page");
 const thirdTitle = document.querySelector(".third-title");
 
-
 var sch;
 var chk;
 var insd;
@@ -398,6 +397,7 @@ function insideDayDisplay(value){
       inside_day_lists.forEach((value)=>{
          value.addEventListener("click", ()=>{
             slider("next");
+            thirdTitle.innerHTML = `<h1>${value.innerText}<span>exercises</span></h1>`;
          })
       })
       
