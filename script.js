@@ -15,6 +15,9 @@ const add = document.querySelector(".add img");
 const save2 = document.querySelector(".check-mark-page2");
 const cancel = document.querySelector(".close-mark-page2");
 
+const thirdPage = document.querySelector(".third-page");
+const thirdTitle = document.querySelector(".third-title");
+
 
 var sch;
 var chk;
@@ -123,7 +126,7 @@ nextPageTitleHolder.addEventListener("click", function(){
 day.forEach(function(value) {
    value.addEventListener("click", function(event) {
       if(!editing){
-         slide();
+         slide(nextPage, home);
          nextPageTitle.innerHTML = `<h1>${value.getAttribute("value")}<span>list</span></h1>`;
          openedDay = value.getAttribute("value");
          insideDayDisplay(value);
@@ -206,6 +209,13 @@ cancel.addEventListener("click", function(){
    cancel.style.display = "none";
    if(insideDay[`${openedDay.toLowerCase()}`].length<5){add.style.display = "flex";}
 })
+
+
+thirdTitle.addEventListener("click", ()=>{
+   nextPage.style.transform = "translateX(100%)";
+   thirdPage.style.transform = "translateX(200%)";
+   home.style.transform = "translateX(-100%)";
+})
 //end
 
 
@@ -213,9 +223,10 @@ cancel.addEventListener("click", function(){
 
 //functions start here
 
-function slide(){
-   nextPage.style.transform = "translateX(-100%)";
-   home.style.transform = "translateX(-100%)";
+function slide(next, prev){
+   next.style.transform = "translateX(-100%)";
+   prev.style.transform = "translateX(-100%)";
+   thirdPage.transform = "translateX(-100%)";
 }
 
 
@@ -391,8 +402,20 @@ function insideDayDisplay(value){
 
    if((insideDay[`${openedDay.toLowerCase()}`].length)>0){
       const deleteBtn = document.querySelectorAll(".list-element img");
+      const inside_day_lists = document.querySelectorAll(".list-element");
+
+      inside_day_lists.forEach(function(value, index){
+         value.addEventListener("click", ()=>{
+            home.style.transform = "translateX(-100%)";
+            nextPage.style.transform = "translateX(-100%)";
+            thirdPage.style.transform = "translateX(-200%)";
+            console.log("done til here");
+         })
+      })
+
       deleteBtn.forEach(function(value, index){
-         value.addEventListener("click", function(event){
+         value.addEventListener("click", function(click){
+            click.stopPropagation();
             insideDay[`${openedDay.toLowerCase()}`].splice(index, 1);
             insideDayUpdate();
             if(openedDay==="Monday"){i=0;}

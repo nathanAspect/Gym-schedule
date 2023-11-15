@@ -11,9 +11,8 @@ body{
    background-color: rgb(219, 219, 219);
    font-family: Arial, Helvetica, sans-serif;
    display: flex;
-   width: 200%;
+   width: 300%;
    height: 100vh;
-   overflow: hidden;
    
 }
 section{
@@ -208,4 +207,79 @@ section{
    opacity: .7;
    width: 100%;
    margin: 0 30px;
+}
+
+
+
+
+.third-page{
+   display: flex;
+   flex-direction: column;
+   justify-content: start;
+   padding: 20px 0 0 0;
+   align-items: center;
+   width: 100%;
+   height: 100vh;
+}
+
+
+
+.third-el img{
+   width: 30px;
+   opacity: .6;
+   display: flex;
+}
+
+.third-title{
+   background-color: white;
+   width: 90%;
+   border-radius: 5px;
+   display: grid;
+   place-content: center;
+}
+
+.third-title h1{
+   font-weight: 700;
+   font-size: 50px;
+   color: rgb(177, 31, 31);
+}
+
+.third-title span{
+   font-weight: 300;
+   font-size: 40px;
+   color: rgb(21, 136, 56);
+}
+
+.third-el{
+   width: 90%;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   margin-top: 15px;
+}
+
+.third-el-single{
+   width: 100%;
+   height: 40px;
+   margin: 10px;
+   display: grid;
+   place-content: center;
+   grid-gap: 10px;
+   grid-template-columns: 1fr 40px;
+   background-color: white;
+   border-radius: 5px;
+   align-items: center;
+}
+
+.third-el-single p{
+   margin: 5px;
+   padding: 0 5px;
+   font-size: 24px;
+   color: rgba(0, 0, 0, 0.884);
+   display: -webkit-box;
+   -webkit-box-orient: vertical;
+   -webkit-line-clamp: 1;
+   overflow: hidden;
+   text-overflow: ellipsis;
 }
