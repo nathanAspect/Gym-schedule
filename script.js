@@ -413,4 +413,3 @@ function insideDayDisplay(value){
 
 }
 //end
-
