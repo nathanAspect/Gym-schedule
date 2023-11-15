@@ -1,3 +1,4 @@
+const allSection = document.querySelectorAll("section");
 const homeTitle = document.querySelector(".home-title");
 const edit = document.querySelector(".home-edit");
 const save = document.querySelector(".home-save");
@@ -24,6 +25,7 @@ var chk;
 var insd;
 var editing=false;
 var openedDay = null;
+var trans = 0;
 
 //object declaration starts here
 
@@ -118,15 +120,14 @@ edit.addEventListener("click", editMode);
 save.addEventListener("click", saveMode);
 homeTitle.addEventListener("click", offEdit);
 nextPageTitleHolder.addEventListener("click", function(){
-   nextPage.style.transform = "translateX(100%)";
-   home.style.transform = "translateX(0%)";
+   slider("prev");
 })
 
 
 day.forEach(function(value) {
    value.addEventListener("click", function(event) {
       if(!editing){
-         slide(nextPage, home);
+         slider("next");
          nextPageTitle.innerHTML = `<h1>${value.getAttribute("value")}<span>list</span></h1>`;
          openedDay = value.getAttribute("value");
          insideDayDisplay(value);
@@ -140,11 +141,6 @@ day.forEach(function(value) {
 
    });
  });
-
- 
-
-   
- 
 
 
 
@@ -210,25 +206,20 @@ cancel.addEventListener("click", function(){
    if(insideDay[`${openedDay.toLowerCase()}`].length<5){add.style.display = "flex";}
 })
 
-
 thirdTitle.addEventListener("click", ()=>{
-   nextPage.style.transform = "translateX(100%)";
-   thirdPage.style.transform = "translateX(200%)";
-   home.style.transform = "translateX(-100%)";
+   slider("prev");
 })
 //end
 
 
 
+const slider = (dir)=>{
+   dir === "next"? trans -= 100 : trans += 100;
 
-//functions start here
-
-function slide(next, prev){
-   next.style.transform = "translateX(-100%)";
-   prev.style.transform = "translateX(-100%)";
-   thirdPage.transform = "translateX(-100%)";
+   allSection.forEach(function (value){
+      value.style.transform = `translateX(${trans}%)`;
+   })
 }
-
 
 function offEdit(){
       editing = false;
@@ -404,14 +395,13 @@ function insideDayDisplay(value){
       const deleteBtn = document.querySelectorAll(".list-element img");
       const inside_day_lists = document.querySelectorAll(".list-element");
 
-      inside_day_lists.forEach(function(value, index){
+      inside_day_lists.forEach((value)=>{
          value.addEventListener("click", ()=>{
-            home.style.transform = "translateX(-100%)";
-            nextPage.style.transform = "translateX(-100%)";
-            thirdPage.style.transform = "translateX(-200%)";
-            console.log("done til here");
+            slider("next");
          })
       })
+      
+
 
       deleteBtn.forEach(function(value, index){
          value.addEventListener("click", function(click){
