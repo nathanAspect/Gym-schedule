@@ -14,7 +14,7 @@ body{
    display: flex;
    width: 300%;
    height: 100%;
-   
+   overflow-x: hidden;
 }
 section{
    position: relative;

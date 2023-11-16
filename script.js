@@ -51,6 +51,7 @@ var insideDay = {
    sunday : []
 }
 
+var exercises = {}
 //end
 
 
@@ -177,6 +178,9 @@ save2.addEventListener("click", function(){
       
       if(inputPage2.value===''){insideDay[`${openedDay.toLowerCase()}`].push('Untitled');}
       else{insideDay[`${openedDay.toLowerCase()}`].push(inputPage2.value);}
+      inputPage2.value === '' ? inputPage2.value = "Untitled" : null;
+      exercises.hasOwnProperty(`${inputPage2.value}`) === true ? null : exercises[`${inputPage2.value}`]=[];
+
       if(openedDay==="Monday"){i=0;}
       else if(openedDay==="Tuesday"){i=1;}
       else if(openedDay==="Wedn"){i=2;}
@@ -208,6 +212,8 @@ cancel.addEventListener("click", function(){
 thirdTitle.addEventListener("click", ()=>{
    slider("prev");
 })
+
+
 //end
 
 
@@ -406,8 +412,13 @@ function insideDayDisplay(value){
       deleteBtn.forEach(function(value, index){
          value.addEventListener("click", function(click){
             click.stopPropagation();
+            
+            
+            delete exercises[`${insideDay[openedDay.toLowerCase()][index]}`];
+
             insideDay[`${openedDay.toLowerCase()}`].splice(index, 1);
             insideDayUpdate();
+            
             if(openedDay==="Monday"){i=0;}
             else if(openedDay==="Tuesday"){i=1;}
             else if(openedDay==="Wedn"){i=2;}
@@ -426,3 +437,4 @@ function insideDayDisplay(value){
 
 }
 //end
+
