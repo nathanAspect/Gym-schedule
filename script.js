@@ -18,6 +18,9 @@ const cancel = document.querySelector(".close-mark-page2");
 
 const thirdPage = document.querySelector(".third-page");
 const thirdTitle = document.querySelector(".third-title");
+const thirdAdd = document.querySelector("#add");
+const thirdSave = document.querySelector("#save");
+const thirdCancel = document.querySelector("#cancel");
 
 var sch;
 var chk;
@@ -214,7 +217,30 @@ thirdTitle.addEventListener("click", ()=>{
 })
 
 
+
+
+thirdAdd.addEventListener("click", ()=>{
+   
+      thirdAdd.style.display = "none";
+      thirdSave.style.display = "flex";
+      thirdCancel.style.display = "flex";
+})
+thirdCancel.addEventListener("click", ()=>{
+   thirdAdd.style.display = "flex";
+   thirdSave.style.display = "none";
+   thirdCancel.style.display = "none";
+})
+thirdSave.addEventListener("click", ()=>{
+   thirdAdd.style.display = "flex";
+   thirdSave.style.display = "none";
+   thirdCancel.style.display = "none";
+})
 //end
+
+
+
+
+
 
 
 
