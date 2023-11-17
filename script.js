@@ -219,11 +219,10 @@ cancel.addEventListener("click", function(){
 })
 
 thirdTitle.addEventListener("click", ()=>{
-   slider("prev");
-   console.log("working here");
    if(exercises[`${thirdOpened}`].length<7){thirdAdd.style.display = "flex";}
    thirdSave.style.display = "none";
    thirdCancel.style.display = "none";
+   slider("prev");
 })
 
 
