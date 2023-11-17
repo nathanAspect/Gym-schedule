@@ -27,6 +27,7 @@ var chk;
 var insd;
 var editing=false;
 var openedDay = null;
+var thirdOpened = null;
 var trans = 0;
 
 //object declaration starts here
@@ -430,6 +431,7 @@ function insideDayDisplay(value){
          value.addEventListener("click", ()=>{
             slider("next");
             thirdTitle.innerHTML = `<h1>${value.innerText}<span>exercises</span></h1>`;
+            thirdOpened = value.innerText;
          })
       })
       
