@@ -220,6 +220,10 @@ cancel.addEventListener("click", function(){
 
 thirdTitle.addEventListener("click", ()=>{
    slider("prev");
+   console.log("working here");
+   if(exercises[`${thirdOpened}`].length<7){thirdAdd.style.display = "flex";}
+   thirdSave.style.display = "none";
+   thirdCancel.style.display = "none";
 })
 
 
@@ -250,7 +254,7 @@ thirdSave.addEventListener("click", ()=>{
    const thirdPageInput = document.querySelector(".input-page3");
    if(thirdPageInput.value === ""){thirdPageInput.value = "Untitled"};
    exercises[`${thirdOpened}`].push(thirdPageInput.value);
-   thirdDayUpdate();
+   thirdUpdate();
    displayThird();
    if(exercises[`${thirdOpened}`].length<7){thirdAdd.style.display = "flex";}
    thirdSave.style.display = "none";
@@ -359,7 +363,7 @@ function insideDayUpdate(){
    insd = JSON.stringify(insideDay);
    localStorage.setItem("insideDay", insd);
 }
-function thirdDayUpdate(){
+function thirdUpdate(){
    if(localStorage.getItem("thirdDay") != null){
       localStorage.removeItem("thirdDay");
    }
@@ -495,15 +499,28 @@ function insideDayDisplay(value){
 
 function displayThird(){
    thirdHolder.innerHTML = null;
-   if(exercises[`${thirdOpened}`]){
+   if(exercises[`${thirdOpened}`].length>0){
       for(i = 0; i<exercises[`${thirdOpened}`].length; i++){
          thirdHolder.innerHTML += `
             <div class="third-el-single">
             <p>${exercises[`${thirdOpened}`][i]}</p>
-            <img src="resource/delete.png">
+            <img src="resource/delete.png" class="deleteThird">
             </div>
          `
       }
+
+      
+         const thirdDelete = document.querySelectorAll(".deleteThird");
+         thirdDelete.forEach((value, index)=>{
+            value.addEventListener("click", ()=>{
+               exercises[`${thirdOpened}`].splice(index, 1);
+               thirdUpdate();
+               displayThird();
+            })
+         })
+
+
    }
+
 }
 
