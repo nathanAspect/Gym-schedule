@@ -227,7 +227,7 @@ thirdAdd.addEventListener("click", ()=>{
    thirdHolder.innerHTML += `
       <div class="list-element">
       <input type="text" 
-      class="input-page2" placeholder="Enter Exercise Group">
+      class="input-page3 input-page2" placeholder="Enter Exercise Group">
       </div>
          `
 
@@ -239,12 +239,16 @@ thirdAdd.addEventListener("click", ()=>{
 thirdCancel.addEventListener("click", ()=>{
    displayThird();
 
-   thirdAdd.style.display = "flex";
+   if(exercises[`${thirdOpened}`].length<7){thirdAdd.style.display = "flex";}
    thirdSave.style.display = "none";
    thirdCancel.style.display = "none";
 })
 thirdSave.addEventListener("click", ()=>{
-   thirdAdd.style.display = "flex";
+   const thirdPageInput = document.querySelector(".input-page3");
+   thirdPageInput.value === "" ? thirdPageInput.value = "Untitled" : null;
+   exercises[`${thirdOpened}`].push(thirdPageInput.value);
+   displayThird();
+   if(exercises[`${thirdOpened}`].length<7){thirdAdd.style.display = "flex";}
    thirdSave.style.display = "none";
    thirdCancel.style.display = "none";
 })
