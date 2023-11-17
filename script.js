@@ -26,6 +26,7 @@ const thirdHolder = document.querySelector(".third-el");
 var sch;
 var chk;
 var insd;
+var thrd;
 var editing=false;
 var openedDay = null;
 var thirdOpened = null;
@@ -74,7 +75,9 @@ if(localStorage.getItem("workedDays") != null){
 if(localStorage.getItem("insideDay") != null){
    insideDay = JSON.parse(localStorage.getItem("insideDay"));
 }
-
+if(localStorage.getItem("thirdDay") != null){
+   exercises = JSON.parse(localStorage.getItem("thirdDay"));
+}
 
 for(i = 0; i<7; i++){
    push_pull[i].innerText = schedule["day"+String((i+1))];
@@ -245,8 +248,9 @@ thirdCancel.addEventListener("click", ()=>{
 })
 thirdSave.addEventListener("click", ()=>{
    const thirdPageInput = document.querySelector(".input-page3");
-   thirdPageInput.value === "" ? thirdPageInput.value = "Untitled" : null;
+   if(thirdPageInput.value === ""){thirdPageInput.value = "Untitled"};
    exercises[`${thirdOpened}`].push(thirdPageInput.value);
+   thirdDayUpdate();
    displayThird();
    if(exercises[`${thirdOpened}`].length<7){thirdAdd.style.display = "flex";}
    thirdSave.style.display = "none";
@@ -355,7 +359,13 @@ function insideDayUpdate(){
    insd = JSON.stringify(insideDay);
    localStorage.setItem("insideDay", insd);
 }
-
+function thirdDayUpdate(){
+   if(localStorage.getItem("thirdDay") != null){
+      localStorage.removeItem("thirdDay");
+   }
+   thrd = JSON.stringify(exercises);
+   localStorage.setItem("thirdDay", thrd);
+}
 
 
 
