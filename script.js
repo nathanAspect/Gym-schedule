@@ -21,6 +21,7 @@ const thirdTitle = document.querySelector(".third-title");
 const thirdAdd = document.querySelector("#add");
 const thirdSave = document.querySelector("#save");
 const thirdCancel = document.querySelector("#cancel");
+const thirdHolder = document.querySelector(".third-el");
 
 var sch;
 var chk;
@@ -197,6 +198,7 @@ save2.addEventListener("click", function(){
       save2.style.display = "none";
       cancel.style.display = "none";
       if(insideDay[`${openedDay.toLowerCase()}`].length<5){add.style.display = "flex";}
+
 })
 
 cancel.addEventListener("click", function(){
@@ -222,11 +224,21 @@ thirdTitle.addEventListener("click", ()=>{
 
 thirdAdd.addEventListener("click", ()=>{
    
-      thirdAdd.style.display = "none";
-      thirdSave.style.display = "flex";
-      thirdCancel.style.display = "flex";
+   thirdHolder.innerHTML += `
+      <div class="list-element">
+      <input type="text" 
+      class="input-page2" placeholder="Enter Exercise Group">
+      </div>
+         `
+
+   thirdAdd.style.display = "none";
+   thirdSave.style.display = "flex";
+   thirdCancel.style.display = "flex";
 })
+
 thirdCancel.addEventListener("click", ()=>{
+   displayThird();
+
    thirdAdd.style.display = "flex";
    thirdSave.style.display = "none";
    thirdCancel.style.display = "none";
@@ -432,6 +444,7 @@ function insideDayDisplay(value){
             slider("next");
             thirdTitle.innerHTML = `<h1>${value.innerText}<span>exercises</span></h1>`;
             thirdOpened = value.innerText;
+            displayThird();
          })
       })
       
@@ -464,5 +477,19 @@ function insideDayDisplay(value){
     }
 
 }
-//end
+
+
+function displayThird(){
+   thirdHolder.innerHTML = null;
+   if(exercises[`${thirdOpened}`]){
+      for(i = 0; i<exercises[`${thirdOpened}`].length; i++){
+         thirdHolder.innerHTML += `
+            <div class="third-el-single">
+            <p>${exercises[`${thirdOpened}`][i]}</p>
+            <img src="resource/delete.png">
+            </div>
+         `
+      }
+   }
+}
 
